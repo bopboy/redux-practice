@@ -22,12 +22,17 @@ function TodoList({ todos, onToggle }) {
 function Todos({ todos, onCreate, onToggle }) {
     const [text, setText] = useState();
     const onChange = e => setText(e.target.value);
+    const onSubmit = e => {
+        e.preventDefault();
+        onCreate(text);
+        setText('');
+    }
 
     return (
         <div>
-            <form>
+            <form onSubmit={onSubmit}>
                 <input value={text} onChange={onChange} placeholder="할일을 입력하세요" />
-                <button>등록</button>
+                <button type="submit">등록</button>
             </form>
             <TodoList todos={todos} onToggle={onToggle} />
         </div>
